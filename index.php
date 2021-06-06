@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 
-<?php include_once 'head.php'; ?>
+<?php require_once 'head.php'; ?>
 
 <body>
 
