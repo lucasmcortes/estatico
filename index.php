@@ -9,7 +9,7 @@
         <div class='container-top'>
                 <img src='tijolinhoportijolinho.png'></img>
                 <p class='amarelo'>
-                        as coisas estão mudando mas
+                        as coisas estão mudando mas<br>
                         você pode <a href='https://open.spotify.com/artist/2cHZgbZDJncmSN7BEKOB4x' class='centro beige'>escutar no spotify</a> enquanto isso
                 </p>
         </div>
