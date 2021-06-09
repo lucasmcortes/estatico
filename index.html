@@ -299,6 +299,17 @@
                 ticAtual = 00;
         });
         /* limpar passos */
+
+        /* inicializa com passos marcados */
+        function randomPassos() {
+                Random = Math.floor(Math.random() * numPassos);
+                $('#passo_' + Passos[Random]).addClass('ativo');
+        }
+        ativacoesRandom = Math.floor(Math.random() * numPassos);
+        for (i=0;i<ativacoesRandom;i++) {
+                randomPassos();
+        }
+        /* inicializa com passos marcados */
 </script>
 
 </body>
