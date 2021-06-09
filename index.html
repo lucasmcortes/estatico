@@ -10,6 +10,7 @@
         <meta name="msapplication-TileColor" content="#3b0055">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Mulish&display=swap" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <style>
@@ -17,33 +18,263 @@
         a {color:#eeefca;}
         p {min-width:100%;max-width:100%;margin:3px auto;font-size:18px;text-align:center;color:#f5ce1b;}
         img {width:100%;height:auto;}
+        * {transition: 0.34s;}
+        audio {display:none;}
+        #container {margin-top:18px;text-align:center;}
+        #sequenciador {min-width:100%;max-width:100%;display:inline-block;}
+        #passoscontainer {max-width:100%;display:inline-block;}
+        @media screen and (max-width: 600px) {
+                #passoscontainer {max-width:35%;}
+        }
+        @media screen and (max-width: 490px) {
+                #passoscontainer {max-width:40%;}
+        }
+        @media screen and (max-width: 420px) {
+                #passoscontainer {max-width:50%;}
+        }
+        @media screen and (max-width: 340px) {
+                #passoscontainer {max-width:55%;}
+        }
+        @media screen and (max-width: 310px) {
+                #passoscontainer {max-width:60%;}
+        }
+        @media screen and (max-width: 290px) {
+                #passoscontainer {max-width:65%;}
+        }
+        .passowrapper {width:34px;display:inline-block;margin-right:5px;}
+        .ticwrapper {display:inline-block;margin:0px 3px;margin-left:9.5px;}
+        .tic {width:4px;height:4px;border-radius:34px;margin:0 auto;background-color:red;}
+        .passo {display:inline-block;width:34px;height:34px;background-color:#f5ce1b;border:3px solid #eeefca;border-radius:9px;}
+        #controles {min-width:100%;max-width:100%;display:inline-block;margin-top:18px;}
+        .linha {min-width:100%;max-width:100%;display:inline-block;}
+        .controle {text-align:center;cursor:pointer;user-select:none;display:inline-block;width:34px;height:34px;margin:5px auto;padding:5px 34px;line-height:30px;vertical-align:middle;background-color:#f5ce1b;border:3px solid #eeefca;border-radius:9px;}
+        .menor {width:5px;}
+        .maior {width:90px;}
+        .ativo, .tocando, .pausado, #controles .controle:active {background-color:#eeefca;}
+        .tic.ativo {background-color:#f5ce1b;}
+        #bottomcontainer {position:fixed;bottom:0;left:0;right:0;}
+        #bottomcontainer p {min-width:100%;max-width:100%;margin:0 auto;padding:1.8% 0px;font-size:12px;text-align:center;color:#f5ce1b;}
 </style>
-        
+
 <body>
 
-<div style='margin-top:34vh;text-align:center;'>
+<div style='margin-top:18vh;text-align:center;'>
         <div style='min-width:100%;max-width:100%;display:inline-block;'>
                 <img style='max-width:320px;' src='img/logo.png'></img>
         </div>
-        <div style='min-width:100%;max-width:100%;display:inline-block;'>
-                <!-- <img style='max-width:180px;' src='img/tijolinhoportijolinho.png'></img> -->
-                <p>
-                        você pode <a target='_blank' href='https://open.spotify.com/artist/2cHZgbZDJncmSN7BEKOB4x'>escutar no spotify</a> enquanto isso
-                </p>
-                <p>
-                        também pode <a target='_blank' href='https://lucascortes.bandcamp.com/'>fazer download pelo bandcamp</a> e pagar o quanto quiser
-                </p>
-                <p>
-                       e até <a target='_blank' href='https://lcscrts.medium.com'>ler</a> :))
-                </p>
-        </div>
 </div>
 
-<div style='position:fixed;bottom:0;left:0;right:0;'>
+<div id='container'>
+        <div id='sequenciador'>
+                <div id='passoscontainer'>
+                        <!-- passowrapper -->
+                        <div class='passowrapper'>
+                                <div id='ticwrapper_01' class='ticwrapper'>
+                                        <p id='tic_01' class='tic'></p>
+                                </div>
+                                <div id='passo_01' class='passo'>
+                                        <audio id='audio_01' name='play' src='audio/audio_01.wav' type='audio/mp3'></audio>
+                                </div>
+                        </div>
+                        <!-- passowrapper -->
+                        <!-- passowrapper -->
+                        <div class='passowrapper'>
+                                <div id='ticwrapper_02' class='ticwrapper'>
+                                        <p id='tic_02' class='tic'></p>
+                                </div>
+                                <div id='passo_02' class='passo'>
+                                        <audio id='audio_02' name='play' src='audio/audio_02.wav' type='audio/mp3'></audio>
+                                </div>
+                        </div>
+                        <!-- passowrapper -->
+                        <!-- passowrapper -->
+                        <div class='passowrapper'>
+                                <div id='ticwrapper_03' class='ticwrapper'>
+                                        <p id='tic_03' class='tic'></p>
+                                </div>
+                                <div id='passo_03' class='passo'>
+                                        <audio id='audio_03' name='play' src='audio/audio_03.wav' type='audio/mp3'></audio>
+                                </div>
+                        </div>
+                        <!-- passowrapper -->
+                        <!-- passowrapper -->
+                        <div class='passowrapper'>
+                                <div id='ticwrapper_04' class='ticwrapper'>
+                                        <p id='tic_04' class='tic'></p>
+                                </div>
+                                <div id='passo_04' class='passo'>
+                                        <audio id='audio_04' name='play' src='audio/audio_04.wav' type='audio/mp3'></audio>
+                                </div>
+                        </div>
+                        <!-- passowrapper -->
+                        <!-- passowrapper -->
+                        <div class='passowrapper'>
+                                <div id='ticwrapper_05' class='ticwrapper'>
+                                        <p id='tic_05' class='tic'></p>
+                                </div>
+                                <div id='passo_05' class='passo'>
+                                        <audio id='audio_05' name='play' src='audio/audio_05.wav' type='audio/mp3'></audio>
+                                </div>
+                        </div>
+                        <!-- passowrapper -->
+                        <!-- passowrapper -->
+                        <div class='passowrapper'>
+                                <div id='ticwrapper_06' class='ticwrapper'>
+                                        <p id='tic_06' class='tic'></p>
+                                </div>
+                                <div id='passo_06' class='passo'>
+                                        <audio id='audio_06' name='play' src='audio/audio_06.wav' type='audio/mp3'></audio>
+                                </div>
+                        </div>
+                        <!-- passowrapper -->
+                        <!-- passowrapper -->
+                        <div class='passowrapper'>
+                                <div id='ticwrapper_07' class='ticwrapper'>
+                                        <p id='tic_07' class='tic'></p>
+                                </div>
+                                <div id='passo_07' class='passo'>
+                                        <audio id='audio_07' name='play' src='audio/audio_07.wav' type='audio/mp3'></audio>
+                                </div>
+                        </div>
+                        <!-- passowrapper -->
+                        <!-- passowrapper -->
+                        <div class='passowrapper'>
+                                <div id='ticwrapper_08' class='ticwrapper'>
+                                        <p id='tic_08' class='tic'></p>
+                                </div>
+                                <div id='passo_08' class='passo'>
+                                        <audio id='audio_08' name='play' src='audio/audio_08.wav' type='audio/mp3'></audio>
+                                </div>
+                        </div>
+                        <!-- passowrapper -->
+                </div>
+        </div> <!-- sequenciador -->
+        <div id='controles'>
+                <div class='linha'>
+                        <div id='tocar' class='controle'>
+                                >
+                        </div>
+                        <div id='pausar' class='controle'>
+                                ||
+                        </div>
+                        <div id='parar' class='controle'>
+                                □
+                        </div>
+                </div> <!-- linha -->
+                <div class='linha'>
+                        <div id='limpar' class='controle maior'>
+                                ⎌
+                        </div>
+                </div> <!-- linha -->
+        </div> <!-- controles -->
+</div> <!-- container -->
+
+<div id='bottomcontainer'>
         <p>
-                (e você pode até <a style='text-align:center;color:#eeefca;' href='mailto:lmattoscortes@gmail.com'>mandar um email</a> também, se quiser falar alguma coisa)
+                © Lucas Côrtes 2021
         </p>
 </div>
+
+<script>
+        /* conta os passos */
+        numPassos = $('.passo').length;
+        ticAtual = 00;
+        caminhada = 0;
+
+        /* adiciona todos os ids dos passos num array */
+        Passos = [];
+        $('.passo').each(function() {
+                 Passos.push($(this).attr('id').split('_')[1]);
+        });
+
+        /* ativa passo */
+        $('.passo').on('click', function() {
+                $(this).toggleClass('ativo');
+        });
+        /* ativa passo */
+
+        /* desativa passos */
+        function desativaPassos() {
+                $('.passo').each(function() {
+                        $(this).removeClass('ativo');
+                });
+        }
+        /* desativa passos */
+
+        /* desativa tics */
+        function desativaTics() {
+                $('.tic').each(function() {
+                        $(this).removeClass('ativo');
+                });
+        }
+        /* desativa tics */
+
+        /* move tics */
+        function moveTics(caminho) {
+                /* se tá pausado/parado, toca */
+                if ($('#tocar').hasClass('tocando')==false) {
+                        $('#pausar').removeClass('pausado');
+                        i = ticAtual;
+                        if (i!==00) {
+                                /* arruma o contador pra continuar de onde pausou */
+                                i = (ticAtual-1);
+                        }
+                        caminhada = setInterval(function() {
+                                desativaTics();
+                                $('#tic_' + Passos[i]).addClass('ativo');
+                                if ($('#passo_' + Passos[i]).hasClass('ativo')) {
+                                        /* se o passo desse tic respectivo tá marcado */
+                                        somAtual = document.getElementById('audio_' + Passos[i]).play();
+                                }
+                                i++;
+                                if (i==numPassos) {i=00;}
+                        }, 340);
+                } else {
+                        /* se tá tocando */
+                        $('#pausar').removeClass('pausado');
+                }
+        }
+        /* move tics */
+
+        /* parar os tics */
+        function pararTics() {
+                clearInterval(caminhada);
+        }
+        /* parar os tics */
+
+        /* tocar */
+        $('#tocar').on('click', function () {
+                moveTics();
+                $('#tocar').addClass('tocando');
+        });
+        /* tocar */
+
+        /* pausar */
+        $('#pausar').on('click', function () {
+                pararTics();
+                ticAtual = $("[class*='tic ativo']").attr('id').split('_')[1];
+                $('#tocar').removeClass('tocando');
+                $('#pausar').addClass('pausado');
+        });
+        /* pausar */
+
+        /* parar */
+        $('#parar').on('click', function () {
+                pararTics();
+                desativaTics();
+                $('#tocar').removeClass('tocando');
+                $('#pausar').removeClass('pausado');
+                ticAtual = 00;
+        });
+        /* parar */
+
+        /* limpar passos */
+        $('#limpar').on('click', function () {
+                desativaPassos();
+                ticAtual = 00;
+        });
+        /* limpar passos */
+</script>
 
 </body>
 </html>
