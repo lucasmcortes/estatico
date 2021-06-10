@@ -11,6 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Mulish&display=swap" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <style>
@@ -38,10 +39,10 @@
         .passo.ativo {box-shadow: 0px -113px 25px -130px rgba(0,0,0,0.75) inset;}
         .tic.ativo {background-color:#f5ce1b;}
         #bottomcontainer {position:fixed;bottom:0;left:0;right:0;}
-        #sidecontainer {position:absolute;top:15vh;right:13px;}
+        #sidecontainer {position:fixed;top:15vh;right:13px;}
         #sidecontainer div {margin:21px 13px;}
         @media screen and (max-width: 600px) {
-                #sidecontainer {position:absolute;min-width:100%;max-width:100%;margin-top:82vh;top:0;right:0;text-align:center;}
+                #sidecontainer {position:fixed;min-width:100%;max-width:100%;margin-top:82vh;top:0;right:0;text-align:center;}
                 #sidecontainer div {margin:13px 8px;display:inline-block;}
                 #sidecontainerwrap {display:inline-block;}
         }
