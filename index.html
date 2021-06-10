@@ -30,18 +30,18 @@
         .passo {display:inline-block;width:30px;height:30px;background-color:#f5ce1b;border:3px solid #eeefca;border-radius:9px;}
         #controles {min-width:100%;max-width:100%;display:inline-block;margin-top:3px;}
         .linha {min-width:100%;max-width:100%;display:inline-block;}
-        .controle {text-align:center;cursor:pointer;user-select:none;display:inline-block;width:34px;height:34px;margin:5px auto;padding:5px 34px;line-height:30px;vertical-align:middle;background-color:#f5ce1b;border:3px solid #eeefca;border-radius:9px;}
-        .menor {width:5px;}
+        .controle {text-align:center;cursor:pointer;user-select:none;text-align:center;display:inline-block;width:34px;height:34px;margin:5px auto;padding:5px 34px;line-height:30px;vertical-align:middle;background-color:#f5ce1b;border:3px solid #eeefca;border-radius:9px;}
+        .menor {width:23px;}
         .maior {width:90px;}
-        .imgcontrole {max-width:26px;height:26px;vertical-align:middle;}
+        .imgcontrole {width:26px;vertical-align:middle;}
         .ativo, .tocando, .pausado, #controles .controle:active {background-color:#eeefca;}
         .passo.ativo {box-shadow: 0px -113px 25px -130px rgba(0,0,0,0.75) inset;}
         .tic.ativo {background-color:#f5ce1b;}
         #bottomcontainer {position:fixed;bottom:0;left:0;right:0;}
-        #sidecontainer {position:absolute;top:18vh;right:13px;}
+        #sidecontainer {position:absolute;top:15vh;right:13px;}
         #sidecontainer div {margin:21px 13px;}
         @media screen and (max-width: 600px) {
-                #sidecontainer {margin-top:65vh;}
+                #sidecontainer {position:absolute;min-width:100%;max-width:100%;margin-top:82vh;top:0;right:0;text-align:center;}
                 #sidecontainer div {margin:13px 8px;display:inline-block;}
                 #sidecontainerwrap {display:inline-block;}
         }
@@ -49,7 +49,7 @@
 
 <body>
 
-<div style='margin-top:13vh;text-align:center;'>
+<div style='margin-top:5vh;text-align:center;'>
         <div style='min-width:100%;max-width:100%;display:inline-block;'>
                 <img style='max-width:320px;' src='img/logo.png'></img>
         </div>
@@ -256,13 +256,13 @@
         </div> <!-- sequenciador -->
         <div id='controles'>
                 <div class='linha'>
-                        <div id='tocar' class='controle'>
+                        <div id='tocar' class='controle menor'>
                                 <img class='imgcontrole' src='img/sequenciador/tocar.png'></img>
                         </div>
-                        <div id='pausar' class='controle'>
+                        <div id='pausar' class='controle menor'>
                                 <img class='imgcontrole' src='img/sequenciador/pausar.png'></img>
                         </div>
-                        <div id='parar' class='controle'>
+                        <div id='parar' class='controle menor'>
                                 <img class='imgcontrole' src='img/sequenciador/parar.png'></img>
                         </div>
                 </div> <!-- linha -->
@@ -286,22 +286,27 @@
         <div id='sidecontainerwrap'>
                 <div>
                         <a target='_blank' href='https://lucascortes.bandcamp.com/'>
-                                <img class='social' src='img/social/bandcamp.png'></img>
+                                <img alt='bandcamp' title='bandcamp' class='social' src='img/social/bandcamp.png'></img>
                         </a>
                 </div>
                 <div>
                         <a target='_blank' href='https://open.spotify.com/artist/2cHZgbZDJncmSN7BEKOB4x'>
-                                <img class='social' src='img/social/spotify.png'></img>
+                                <img alt='spotify' title='spotify' class='social' src='img/social/spotify.png'></img>
                         </a>
                 </div>
                 <div>
                         <a target='_blank' href='https://lcscrts.medium.com'>
-                                <img class='social' src='img/social/medium.png'></img>
+                                <img alt='medium' title='medium' class='social' src='img/social/medium.png'></img>
                         </a>
                 </div>
                 <div>
                         <a target='_blank' href='https://github.com/lucasmcortes'>
-                                <img class='social' src='img/social/github.png'></img>
+                                <img alt='github' title='github' class='social' src='img/social/github.png'></img>
+                        </a>
+                </div>
+                <div>
+                        <a target='_blank' href='mailto:lmattoscortes@gmail.com'>
+                                <img alt='email' title='email' class='social' src='img/email-icon.png'></img>
                         </a>
                 </div>
         </div>
@@ -310,7 +315,7 @@
 <div id='bottomcontainer'>
         <div class='linha'>
                 <p style='padding:1.8% 0px;'>
-                        © Lucas Côrtes <?php echo date('Y'); ?>
+                        © Lucas Côrtes 2021
                 </p>
         </div>
 </div>
@@ -331,9 +336,9 @@
         velInput = $('#velocidade');
         velocidade = 1000 * 60 /  velInput.val();
         velInput.on('change', function () {
-        velocidade = 1000 * 60 /  velInput.val();
-        Pausar();
-        Tocar();
+                velocidade = 1000 * 60 /  velInput.val();
+                Pausar();
+                Tocar();
         });
         /* velocidade */
 
