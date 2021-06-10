@@ -325,7 +325,7 @@
         /* lista de instrumentos */
         instrumentos = [];
         $('audio').each(function() {
-        instrumentos.push($(this).attr('class'));
+                instrumentos.push($(this).attr('class'));
         });
         /* pega só os unique entries do array */
         instrumentos = instrumentos.filter((x, i, a) => a.indexOf(x) == i);
@@ -356,129 +356,129 @@
         /* adiciona todos os ids dos passos num array */
         Passos = [];
         $('.passo').each(function() {
-         Passos.push($(this).attr('id').split('_')[1]);
+                Passos.push($(this).attr('id').split('_')[1]);
         });
 
         /* ativa passo */
         $('.passo').on('click', function() {
-        $(this).toggleClass('ativo');
+                $(this).toggleClass('ativo');
         });
         /* ativa passo */
 
         /* desativa passos */
         function desativaPassos() {
-        $('.passo').each(function() {
-                $(this).removeClass('ativo');
-        });
+                $('.passo').each(function() {
+                        $(this).removeClass('ativo');
+                });
         }
         /* desativa passos */
 
         /* desativa tics */
         function desativaTics() {
-        $('.tic').each(function() {
-                $(this).removeClass('ativo');
-        });
+                $('.tic').each(function() {
+                        $(this).removeClass('ativo');
+                });
         }
         /* desativa tics */
 
         /* maestro */
         function Maestro() {
-        desativaTics();
-        $('#tic_' + Passos[batuta]).addClass('ativo');
-        for (inst=0;inst<banda;inst++) {
-                if ($('#passo_' + Passos[batuta] + '.' + instrumentos[inst]).hasClass('ativo')) {
-                        /* se o passo desse tic respectivo tá marcado */
-                        $('#audio_' + Passos[batuta] + '.' + instrumentos[inst])[0].play();
+                desativaTics();
+                $('#tic_' + Passos[batuta]).addClass('ativo');
+                for (inst=0;inst<banda;inst++) {
+                        if ($('#passo_' + Passos[batuta] + '.' + instrumentos[inst]).hasClass('ativo')) {
+                                /* se o passo desse tic respectivo tá marcado */
+                                $('#audio_' + Passos[batuta] + '.' + instrumentos[inst])[0].play();
+                        }
                 }
-        }
-        batuta++;
-        if (batuta==numPassos) {batuta=00;}
+                batuta++;
+                if (batuta==numPassos) {batuta=00;}
         }
         /* maestro */
 
         /* move tics */
         function moveTics() {
-        /* se tá pausado/parado, toca */
-        if ($('#tocar').hasClass('tocando')==false) {
-                $('#pausar').removeClass('pausado');
-                batuta = ticAtual;
-                if (batuta!==00) {
-                        /* arruma o contador pra continuar de onde pausou */
-                        batuta = (ticAtual-1);
+                /* se tá pausado/parado, toca */
+                if ($('#tocar').hasClass('tocando')==false) {
+                        $('#pausar').removeClass('pausado');
+                        batuta = ticAtual;
+                        if (batuta!==00) {
+                                /* arruma o contador pra continuar de onde pausou */
+                                batuta = (ticAtual-1);
+                        }
+                        caminhada = setInterval(function(batuta) {
+                                Maestro(batuta);
+                        }, velocidade);
+                } else {
+                        /* se tá tocando */
+                        $('#pausar').removeClass('pausado');
                 }
-                caminhada = setInterval(function(batuta) {
-                        Maestro(batuta);
-                }, velocidade);
-        } else {
-                /* se tá tocando */
-                $('#pausar').removeClass('pausado');
-        }
         }
         /* move tics */
 
         /* parar os tics */
         function pararTics() {
-        clearInterval(caminhada);
+                clearInterval(caminhada);
         }
         /* parar os tics */
 
         /* tocar */
         function Tocar() {
-        moveTics();
-        $('#tocar').addClass('tocando');
+                moveTics();
+                $('#tocar').addClass('tocando');
         }
         $('#tocar').on('click', function () {
-        Tocar();
+                Tocar();
         });
         /* tocar */
 
         /* pausar */
         function Pausar() {
-        pararTics();
-        ticAtual = $('.tic.ativo').attr('id').split('_')[1];
-        $('#tocar').removeClass('tocando');
-        $('#pausar').addClass('pausado');
+                pararTics();
+                ticAtual = $('.tic.ativo').attr('id').split('_')[1];
+                $('#tocar').removeClass('tocando');
+                $('#pausar').addClass('pausado');
         }
         $('#pausar').on('click', function () {
-        Pausar();
+                Pausar();
         });
         /* pausar */
 
         /* parar */
         function Parar() {
-        pararTics();
-        desativaTics();
-        $('#tocar').removeClass('tocando');
-        $('#pausar').removeClass('pausado');
-        $('#tic_01').addClass('ativo');
-        ticAtual = 00;
+                pararTics();
+                desativaTics();
+                $('#tocar').removeClass('tocando');
+                $('#pausar').removeClass('pausado');
+                $('#tic_01').addClass('ativo');
+                ticAtual = 00;
         }
         $('#parar').on('click', function () {
-        Parar();
+                Parar();
         });
         /* parar */
 
         /* limpar passos */
         function Limpar() {
-        desativaPassos();
-        ticAtual = 00;
+                desativaPassos();
+                ticAtual = 00;
         }
         $('#limpar').on('click', function () {
-        Limpar();
+                Limpar();
         });
         /* limpar passos */
 
         /* inicializa com passos marcados */
         function randomPassos() {
-        for (inst=0;inst<banda;inst++) {
-                Random = Math.floor(Math.random() * numPassos);
-                $('#passo_' + Passos[Random] + '.' + instrumentos[inst]).addClass('ativo');
-        }
+                for (inst=0;inst<banda;inst++) {
+                        Random = Math.floor(Math.random() * numPassos);
+                        $('#passo_' + Passos[Random] + '.' + instrumentos[inst]).addClass('ativo');
+                }
         }
         randomPassos();
         $('#aleatorio').on('click', function () {
-        Limpar();
-        randomPassos();
+                Limpar();
+                randomPassos();
         });
         /* inicializa com passos marcados */
 
