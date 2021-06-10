@@ -19,34 +19,16 @@
         audio {display:none;}
         a {color:#eeefca;}
         p {min-width:100%;max-width:100%;margin:0 auto;font-size:12px;text-align:center;color:#f5ce1b;}
-        img.social {max-width:36px;height:36px;vertical-align:top;}
         img {width:100%;height:auto;}
-        #container {margin-top:18vh;text-align:center;}
+        img.social {max-width:36px;height:36px;vertical-align:top;}
+        #container {text-align:center;}
         #sequenciador {min-width:100%;max-width:100%;display:inline-block;}
         #passoscontainer {max-width:100%;display:inline-block;}
-        @media screen and (max-width: 600px) {
-                #passoscontainer {max-width:35%;}
-        }
-        @media screen and (max-width: 490px) {
-                #passoscontainer {max-width:40%;}
-        }
-        @media screen and (max-width: 420px) {
-                #passoscontainer {max-width:50%;}
-        }
-        @media screen and (max-width: 340px) {
-                #passoscontainer {max-width:55%;}
-        }
-        @media screen and (max-width: 310px) {
-                #passoscontainer {max-width:60%;}
-        }
-        @media screen and (max-width: 290px) {
-                #passoscontainer {max-width:65%;}
-        }
-        .passowrapper {width:34px;display:inline-block;margin-right:5px;}
-        .ticwrapper {display:inline-block;margin:0px 5px;margin-left:9.5px;}
+        .passowrapper {width:30px;display:inline-block;margin-right:3px;}
+        .ticwrapper {display:inline-block;margin:0px 5px;margin-left:7px;}
         .tic {width:4.5px;height:4.5px;border-radius:34px;margin:0 auto;background-color:red;}
-        .passo {display:inline-block;width:34px;height:34px;background-color:#f5ce1b;border:3px solid #eeefca;border-radius:9px;}
-        #controles {min-width:100%;max-width:100%;display:inline-block;margin-top:18px;}
+        .passo {display:inline-block;width:30px;height:30px;background-color:#f5ce1b;border:3px solid #eeefca;border-radius:9px;}
+        #controles {min-width:100%;max-width:100%;display:inline-block;margin-top:3px;}
         .linha {min-width:100%;max-width:100%;display:inline-block;}
         .controle {text-align:center;cursor:pointer;user-select:none;display:inline-block;width:34px;height:34px;margin:5px auto;padding:5px 34px;line-height:30px;vertical-align:middle;background-color:#f5ce1b;border:3px solid #eeefca;border-radius:9px;}
         .menor {width:5px;}
@@ -56,11 +38,18 @@
         .passo.ativo {box-shadow: 0px -113px 25px -130px rgba(0,0,0,0.75) inset;}
         .tic.ativo {background-color:#f5ce1b;}
         #bottomcontainer {position:fixed;bottom:0;left:0;right:0;}
+        #sidecontainer {position:absolute;top:18vh;right:13px;}
+        #sidecontainer div {margin:21px 13px;}
+        @media screen and (max-width: 600px) {
+                #sidecontainer {margin-top:65vh;}
+                #sidecontainer div {margin:13px 8px;display:inline-block;}
+                #sidecontainerwrap {display:inline-block;}
+        }
 </style>
 
 <body>
 
-<div style='margin-top:18vh;text-align:center;'>
+<div style='margin-top:13vh;text-align:center;'>
         <div style='min-width:100%;max-width:100%;display:inline-block;'>
                 <img style='max-width:320px;' src='img/logo.png'></img>
         </div>
@@ -347,13 +336,13 @@
         <div id='controles'>
                 <div class='linha'>
                         <div id='tocar' class='controle'>
-                                <img class='imgcontrole' src='img/tocar.png'></img>
+                                <img class='imgcontrole' src='img/sequenciador/tocar.png'></img>
                         </div>
                         <div id='pausar' class='controle'>
-                                <img class='imgcontrole' src='img/pausar.png'></img>
+                                <img class='imgcontrole' src='img/sequenciador/pausar.png'></img>
                         </div>
                         <div id='parar' class='controle'>
-                                <img class='imgcontrole' src='img/parar.png'></img>
+                                <img class='imgcontrole' src='img/sequenciador/parar.png'></img>
                         </div>
                 </div> <!-- linha -->
                 <div class='linha'>
@@ -372,37 +361,61 @@
         </div> <!-- controles -->
 </div> <!-- container -->
 
-<div id='bottomcontainer'>
-        <div class='linha' style='margin-bottom:18px;'>
-                <div style='display:inline-block;margin:0px 5px'>
+<div id='sidecontainer'>
+        <div id='sidecontainerwrap'>
+                <div>
                         <a target='_blank' href='https://open.spotify.com/artist/2cHZgbZDJncmSN7BEKOB4x'>
                                 <img class='social' src='img/social/bandcamp.png'></img>
                         </a>
                 </div>
-                <div style='display:inline-block;margin:0px 5px'>
+                <div>
                         <a target='_blank' href='https://lucascortes.bandcamp.com/'>
                                 <img class='social' src='img/social/spotify.png'></img>
                         </a>
                 </div>
-                <div style='display:inline-block;margin:0px 5px'>
+                <div>
                         <a target='_blank' href='https://lcscrts.medium.com'>
                                 <img class='social' src='img/social/medium.png'></img>
                         </a>
                 </div>
-                <div style='display:inline-block;margin:0px 5px'>
+                <div>
                         <a target='_blank' href='https://github.com/lucasmcortes'>
                                 <img class='social' src='img/social/github.png'></img>
                         </a>
                 </div>
         </div>
+</div>
+
+<div id='bottomcontainer'>
         <div class='linha'>
-                <p>
-                        © Lucas Côrtes 2021
+                <p style='padding:1.8% 0px;'>
+                        © Lucas Côrtes <?php echo date('Y'); ?>
                 </p>
         </div>
 </div>
 
 <script>
+        /* lista de instrumentos */
+        instrumentos = [];
+        $('audio').each(function() {
+        instrumentos.push($(this).attr('class'));
+        });
+        /* pega só os unique entries do array */
+        instrumentos = instrumentos.filter((x, i, a) => a.indexOf(x) == i);
+        /* exemplo: instrumentos[0] = bateria */
+        banda = instrumentos.length;
+        /* lista de instrumentos */
+
+        /* velocidade */
+        velInput = $('#velocidade');
+        velocidade = 1000 * 60 /  velInput.val();
+        velInput.on('change', function () {
+        velocidade = 1000 * 60 /  velInput.val();
+        Pausar();
+        Tocar();
+        });
+        /* velocidade */
+
         /* conta os passos */
         numPassos = $('.passo').length;
         ticAtual = 00;
@@ -411,107 +424,135 @@
         /* adiciona todos os ids dos passos num array */
         Passos = [];
         $('.passo').each(function() {
-                 Passos.push($(this).attr('id').split('_')[1]);
+         Passos.push($(this).attr('id').split('_')[1]);
         });
 
         /* ativa passo */
         $('.passo').on('click', function() {
-                $(this).toggleClass('ativo');
+        $(this).toggleClass('ativo');
         });
         /* ativa passo */
 
         /* desativa passos */
         function desativaPassos() {
-                $('.passo').each(function() {
-                        $(this).removeClass('ativo');
-                });
+        $('.passo').each(function() {
+                $(this).removeClass('ativo');
+        });
         }
         /* desativa passos */
 
         /* desativa tics */
         function desativaTics() {
-                $('.tic').each(function() {
-                        $(this).removeClass('ativo');
-                });
+        $('.tic').each(function() {
+                $(this).removeClass('ativo');
+        });
         }
         /* desativa tics */
 
-        /* move tics */
-        function moveTics(caminho) {
-                /* se tá pausado/parado, toca */
-                if ($('#tocar').hasClass('tocando')==false) {
-                        $('#pausar').removeClass('pausado');
-                        i = ticAtual;
-                        if (i!==00) {
-                                /* arruma o contador pra continuar de onde pausou */
-                                i = (ticAtual-1);
-                        }
-                        caminhada = setInterval(function() {
-                                desativaTics();
-                                $('#tic_' + Passos[i]).addClass('ativo');
-                                if ($('#passo_' + Passos[i]).hasClass('ativo')) {
-                                        /* se o passo desse tic respectivo tá marcado */
-                                        somAtual = document.getElementById('audio_' + Passos[i]).play();
-                                }
-                                i++;
-                                if (i==numPassos) {i=00;}
-                        }, 340);
-                } else {
-                        /* se tá tocando */
-                        $('#pausar').removeClass('pausado');
+        /* maestro */
+        function Maestro() {
+        desativaTics();
+        $('#tic_' + Passos[batuta]).addClass('ativo');
+        for (inst=0;inst<banda;inst++) {
+                if ($('#passo_' + Passos[batuta] + '.' + instrumentos[inst]).hasClass('ativo')) {
+                        /* se o passo desse tic respectivo tá marcado */
+                        $('#audio_' + Passos[batuta] + '.' + instrumentos[inst])[0].play();
                 }
+        }
+        batuta++;
+        if (batuta==numPassos) {batuta=00;}
+        }
+        /* maestro */
+
+        /* move tics */
+        function moveTics() {
+        /* se tá pausado/parado, toca */
+        if ($('#tocar').hasClass('tocando')==false) {
+                $('#pausar').removeClass('pausado');
+                batuta = ticAtual;
+                if (batuta!==00) {
+                        /* arruma o contador pra continuar de onde pausou */
+                        batuta = (ticAtual-1);
+                }
+                caminhada = setInterval(function(batuta) {
+                        Maestro(batuta);
+                }, velocidade);
+        } else {
+                /* se tá tocando */
+                $('#pausar').removeClass('pausado');
+        }
         }
         /* move tics */
 
         /* parar os tics */
         function pararTics() {
-                clearInterval(caminhada);
+        clearInterval(caminhada);
         }
         /* parar os tics */
 
         /* tocar */
+        function Tocar() {
+        moveTics();
+        $('#tocar').addClass('tocando');
+        }
         $('#tocar').on('click', function () {
-                moveTics();
-                $('#tocar').addClass('tocando');
+        Tocar();
         });
         /* tocar */
 
         /* pausar */
+        function Pausar() {
+        pararTics();
+        ticAtual = $('.tic.ativo').attr('id').split('_')[1];
+        $('#tocar').removeClass('tocando');
+        $('#pausar').addClass('pausado');
+        }
         $('#pausar').on('click', function () {
-                pararTics();
-                ticAtual = $("[class*='tic ativo']").attr('id').split('_')[1];
-                $('#tocar').removeClass('tocando');
-                $('#pausar').addClass('pausado');
+        Pausar();
         });
         /* pausar */
 
         /* parar */
+        function Parar() {
+        pararTics();
+        desativaTics();
+        $('#tocar').removeClass('tocando');
+        $('#pausar').removeClass('pausado');
+        $('#tic_01').addClass('ativo');
+        ticAtual = 00;
+        }
         $('#parar').on('click', function () {
-                pararTics();
-                desativaTics();
-                $('#tocar').removeClass('tocando');
-                $('#pausar').removeClass('pausado');
-                ticAtual = 00;
+        Parar();
         });
         /* parar */
 
         /* limpar passos */
+        function Limpar() {
+        desativaPassos();
+        ticAtual = 00;
+        }
         $('#limpar').on('click', function () {
-                desativaPassos();
-                ticAtual = 00;
+        Limpar();
         });
         /* limpar passos */
 
         /* inicializa com passos marcados */
         function randomPassos() {
+        for (inst=0;inst<banda;inst++) {
                 Random = Math.floor(Math.random() * numPassos);
-                $('#passo_' + Passos[Random]).addClass('ativo');
+                $('#passo_' + Passos[Random] + '.' + instrumentos[inst]).addClass('ativo');
         }
-        ativacoesRandom = Math.floor(Math.random() * numPassos);
-        for (i=0;i<ativacoesRandom;i++) {
-                randomPassos();
         }
+        randomPassos();
+        $('#aleatorio').on('click', function () {
+        Limpar();
+        randomPassos();
+        });
         /* inicializa com passos marcados */
+
+        /* bota o primeiro tic aceso */
+        $('#tic_01').addClass('ativo');
+        /* bota o primeiro tic aceso */
 </script>
 
 </body>
