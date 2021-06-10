@@ -343,8 +343,11 @@
                 } else {
                         velocidade = 1000 * 60 /  velInput.val();
                 }
-                Pausar();
-                Tocar();
+
+                if ($('#tocar').hasClass('tocando')!==false) {
+                        Pausar();
+                        Tocar();
+                }
         });
         /* velocidade */
 
