@@ -337,7 +337,12 @@
         velInput = $('#velocidade');
         velocidade = 1000 * 60 /  velInput.val();
         velInput.on('change', function () {
-                velocidade = 1000 * 60 /  velInput.val();
+                if ((velInput.val() == 0) || (velInput.val() >1000)) {
+                        velocidade = 1000 * 60 / 120;
+                        velInput.val('120');
+                } else {
+                        velocidade = 1000 * 60 /  velInput.val();
+                }
                 Pausar();
                 Tocar();
         });
