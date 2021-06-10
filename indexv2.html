@@ -1,0 +1,317 @@
+<!doctype html>
+<html>
+
+<head>
+        <title>LucasCôrtes.com.br</title>
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <link rel="icon" type="image/png" href="img/favicon.png" sizes="32x32">
+        <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+        <meta name="msapplication-TileImage" content="img/mstile-144x144.png">
+        <meta name="msapplication-TileColor" content="#3b0055">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Mulish&display=swap" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<style>
+        body {background-color:#3b0055;margin:0;font-family: "Mulish", sans-serif;}
+        a {color:#eeefca;}
+        p {min-width:100%;max-width:100%;margin:3px auto;font-size:18px;text-align:center;color:#f5ce1b;}
+        img {width:100%;height:auto;}
+        img.social {max-width:36px;height:36px;vertical-align:top;}
+        * {transition: 0.34s;}
+        audio {display:none;}
+        #container {margin-top:26px;text-align:center;}
+        #sequenciador {min-width:100%;max-width:100%;display:inline-block;}
+        #passoscontainer {max-width:100%;display:inline-block;}
+        @media screen and (max-width: 600px) {
+                #passoscontainer {max-width:35%;}
+        }
+        @media screen and (max-width: 490px) {
+                #passoscontainer {max-width:40%;}
+        }
+        @media screen and (max-width: 420px) {
+                #passoscontainer {max-width:50%;}
+        }
+        @media screen and (max-width: 340px) {
+                #passoscontainer {max-width:55%;}
+        }
+        @media screen and (max-width: 310px) {
+                #passoscontainer {max-width:60%;}
+        }
+        @media screen and (max-width: 290px) {
+                #passoscontainer {max-width:65%;}
+        }
+        .passowrapper {width:34px;display:inline-block;margin-right:5px;}
+        .ticwrapper {display:inline-block;margin:0px 3px;margin-left:9.5px;}
+        .tic {width:4.5px;height:4.5px;border-radius:34px;margin:0 auto;background-color:red;}
+        .passo {cursor:pointer;display:inline-block;width:34px;height:34px;background-color:#f5ce1b;border:3px solid #eeefca;border-radius:9px;}
+        #controles {min-width:100%;max-width:100%;display:inline-block;margin-top:18px;}
+        .linha {min-width:100%;max-width:100%;display:inline-block;}
+        .controle {text-align:center;cursor:pointer;user-select:none;display:inline-block;width:34px;height:34px;margin:5px auto;padding:5px 34px;line-height:30px;vertical-align:middle;background-color:#f5ce1b;border:3px solid #eeefca;border-radius:9px;}
+        .imgcontrole {max-width:26px;height:26px;vertical-align:middle;}
+        .menor {width:5px;}
+        .maior {width:90px;}
+        .ativo, .tocando, .pausado, #controles .controle:active {background-color:#eeefca;}
+        .tic.ativo {background-color:#f5ce1b;}
+        #bottomcontainer {position:fixed;bottom:0;left:0;right:0;text-align:center;}
+        #bottomcontainer p {min-width:100%;max-width:100%;margin:0 auto;padding:1.8% 0px;font-size:12px;text-align:center;color:#f5ce1b;}
+</style>
+
+<body>
+
+<div style='margin-top:18vh;text-align:center;'>
+        <div style='min-width:100%;max-width:100%;display:inline-block;'>
+                <img style='max-width:320px;' src='img/logo.png'></img>
+        </div>
+</div>
+
+<div id='container'>
+        <div id='sequenciador'>
+                <div id='passoscontainer'>
+                        <!-- passowrapper -->
+                        <div class='passowrapper'>
+                                <div id='ticwrapper_01' class='ticwrapper'>
+                                        <p id='tic_01' class='tic'></p>
+                                </div>
+                                <div id='passo_01' class='passo'>
+                                        <audio id='audio_01' name='play' src='audio/audio_01.wav' type='audio/mp3'></audio>
+                                </div>
+                        </div>
+                        <!-- passowrapper -->
+                        <!-- passowrapper -->
+                        <div class='passowrapper'>
+                                <div id='ticwrapper_02' class='ticwrapper'>
+                                        <p id='tic_02' class='tic'></p>
+                                </div>
+                                <div id='passo_02' class='passo'>
+                                        <audio id='audio_02' name='play' src='audio/audio_02.wav' type='audio/mp3'></audio>
+                                </div>
+                        </div>
+                        <!-- passowrapper -->
+                        <!-- passowrapper -->
+                        <div class='passowrapper'>
+                                <div id='ticwrapper_03' class='ticwrapper'>
+                                        <p id='tic_03' class='tic'></p>
+                                </div>
+                                <div id='passo_03' class='passo'>
+                                        <audio id='audio_03' name='play' src='audio/audio_03.wav' type='audio/mp3'></audio>
+                                </div>
+                        </div>
+                        <!-- passowrapper -->
+                        <!-- passowrapper -->
+                        <div class='passowrapper'>
+                                <div id='ticwrapper_04' class='ticwrapper'>
+                                        <p id='tic_04' class='tic'></p>
+                                </div>
+                                <div id='passo_04' class='passo'>
+                                        <audio id='audio_04' name='play' src='audio/audio_04.wav' type='audio/mp3'></audio>
+                                </div>
+                        </div>
+                        <!-- passowrapper -->
+                        <!-- passowrapper -->
+                        <div class='passowrapper'>
+                                <div id='ticwrapper_05' class='ticwrapper'>
+                                        <p id='tic_05' class='tic'></p>
+                                </div>
+                                <div id='passo_05' class='passo'>
+                                        <audio id='audio_05' name='play' src='audio/audio_05.wav' type='audio/mp3'></audio>
+                                </div>
+                        </div>
+                        <!-- passowrapper -->
+                        <!-- passowrapper -->
+                        <div class='passowrapper'>
+                                <div id='ticwrapper_06' class='ticwrapper'>
+                                        <p id='tic_06' class='tic'></p>
+                                </div>
+                                <div id='passo_06' class='passo'>
+                                        <audio id='audio_06' name='play' src='audio/audio_06.wav' type='audio/mp3'></audio>
+                                </div>
+                        </div>
+                        <!-- passowrapper -->
+                        <!-- passowrapper -->
+                        <div class='passowrapper'>
+                                <div id='ticwrapper_07' class='ticwrapper'>
+                                        <p id='tic_07' class='tic'></p>
+                                </div>
+                                <div id='passo_07' class='passo'>
+                                        <audio id='audio_07' name='play' src='audio/audio_07.wav' type='audio/mp3'></audio>
+                                </div>
+                        </div>
+                        <!-- passowrapper -->
+                        <!-- passowrapper -->
+                        <div class='passowrapper'>
+                                <div id='ticwrapper_08' class='ticwrapper'>
+                                        <p id='tic_08' class='tic'></p>
+                                </div>
+                                <div id='passo_08' class='passo'>
+                                        <audio id='audio_08' name='play' src='audio/audio_08.wav' type='audio/mp3'></audio>
+                                </div>
+                        </div>
+                        <!-- passowrapper -->
+                </div>
+        </div> <!-- sequenciador -->
+        <div id='controles'>
+                <div class='linha'>
+                        <div id='tocar' class='controle'>
+                                <img class='imgcontrole' src='img/sequenciador/tocar.png'></img>
+                        </div>
+                        <div id='pausar' class='controle'>
+                                <img class='imgcontrole' src='img/sequenciador/pausar.png'></img>
+                        </div>
+                        <div id='parar' class='controle'>
+                                <img class='imgcontrole' src='img/sequenciador/parar.png'></img>
+                        </div>
+                </div> <!-- linha -->
+                <div class='linha'>
+                        <div id='limpar' class='controle maior'>
+                                <img class='imgcontrole' src='img/sequenciador/limpar.png'></img>
+                        </div>
+                </div> <!-- linha -->
+        </div> <!-- controles -->
+</div> <!-- container -->
+
+<div id='bottomcontainer'>
+        <div class='linha' style='margin-bottom:18px;'>
+                <div style='display:inline-block;margin:0px 5px'>
+                        <a target='_blank' href='https://open.spotify.com/artist/2cHZgbZDJncmSN7BEKOB4x'>
+                                <img class='social' src='img/social/bandcamp.png'></img>
+                        </a>
+                </div>
+                <div style='display:inline-block;margin:0px 5px'>
+                        <a target='_blank' href='https://lucascortes.bandcamp.com/'>
+                                <img class='social' src='img/social/spotify.png'></img>
+                        </a>
+                </div>
+                <div style='display:inline-block;margin:0px 5px'>
+                        <a target='_blank' href='https://lcscrts.medium.com'>
+                                <img class='social' src='img/social/medium.png'></img>
+                        </a>
+                </div>
+                <div style='display:inline-block;margin:0px 5px'>
+                        <a target='_blank' href='https://github.com/lucasmcortes'>
+                                <img class='social' src='img/social/github.png'></img>
+                        </a>
+                </div>
+        </div>
+        <div class='linha'>
+                <p>
+                        © Lucas Côrtes 2021
+                </p>
+        </div>
+</div>
+
+<script>
+        /* conta os passos */
+        numPassos = $('.passo').length;
+        ticAtual = 00;
+        caminhada = 0;
+
+        /* adiciona todos os ids dos passos num array */
+        Passos = [];
+        $('.passo').each(function() {
+                 Passos.push($(this).attr('id').split('_')[1]);
+        });
+
+        /* ativa passo */
+        $('.passo').on('click', function() {
+                $(this).toggleClass('ativo');
+        });
+        /* ativa passo */
+
+        /* desativa passos */
+        function desativaPassos() {
+                $('.passo').each(function() {
+                        $(this).removeClass('ativo');
+                });
+        }
+        /* desativa passos */
+
+        /* desativa tics */
+        function desativaTics() {
+                $('.tic').each(function() {
+                        $(this).removeClass('ativo');
+                });
+        }
+        /* desativa tics */
+
+        /* move tics */
+        function moveTics(caminho) {
+                /* se tá pausado/parado, toca */
+                if ($('#tocar').hasClass('tocando')==false) {
+                        $('#pausar').removeClass('pausado');
+                        i = ticAtual;
+                        if (i!==00) {
+                                /* arruma o contador pra continuar de onde pausou */
+                                i = (ticAtual-1);
+                        }
+                        caminhada = setInterval(function() {
+                                desativaTics();
+                                $('#tic_' + Passos[i]).addClass('ativo');
+                                if ($('#passo_' + Passos[i]).hasClass('ativo')) {
+                                        /* se o passo desse tic respectivo tá marcado */
+                                        somAtual = document.getElementById('audio_' + Passos[i]).play();
+                                }
+                                i++;
+                                if (i==numPassos) {i=00;}
+                        }, 340);
+                } else {
+                        /* se tá tocando */
+                        $('#pausar').removeClass('pausado');
+                }
+        }
+        /* move tics */
+
+        /* parar os tics */
+        function pararTics() {
+                clearInterval(caminhada);
+        }
+        /* parar os tics */
+
+        /* tocar */
+        $('#tocar').on('click', function () {
+                moveTics();
+                $('#tocar').addClass('tocando');
+        });
+        /* tocar */
+
+        /* pausar */
+        $('#pausar').on('click', function () {
+                pararTics();
+                ticAtual = $("[class*='tic ativo']").attr('id').split('_')[1];
+                $('#tocar').removeClass('tocando');
+                $('#pausar').addClass('pausado');
+        });
+        /* pausar */
+
+        /* parar */
+        $('#parar').on('click', function () {
+                pararTics();
+                desativaTics();
+                $('#tocar').removeClass('tocando');
+                $('#pausar').removeClass('pausado');
+                ticAtual = 00;
+        });
+        /* parar */
+
+        /* limpar passos */
+        $('#limpar').on('click', function () {
+                desativaPassos();
+                ticAtual = 00;
+        });
+        /* limpar passos */
+
+        /* inicializa com passos marcados */
+        function randomPassos() {
+                Random = Math.floor(Math.random() * numPassos);
+                $('#passo_' + Passos[Random]).addClass('ativo');
+        }
+        ativacoesRandom = Math.floor(Math.random() * numPassos);
+        for (i=0;i<ativacoesRandom;i++) {
+                randomPassos();
+        }
+        /* inicializa com passos marcados */
+</script>
+
+</body>
+</html>
