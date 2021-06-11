@@ -353,6 +353,7 @@
 
         /* conta os passos */
         numPassos = $('.passo').length;
+        totalTics = $('.tic').length;
         ticAtual = 00;
         caminhada = 0;
 
@@ -473,9 +474,22 @@
 
         /* inicializa com passos marcados */
         function randomPassos() {
-                for (inst=0;inst<banda;inst++) {
-                        Random = Math.floor(Math.random() * numPassos);
-                        $('#passo_' + Passos[Random] + '.' + instrumentos[inst]).addClass('ativo');
+                /* inicializa o array pra colocar os passos ativados */
+                passosAtivados = [];
+                /* pra cada tic */
+                for (tic=0;passosAtivados.length<8;tic++) {
+                        /* pra cada instrumento */
+                        for (inst=0;inst<banda;inst++) {
+                                /* pega um random dentro do total de tics */
+                                Random = Math.floor(Math.random() * totalTics);
+                                /* faz até dar um passo marcado pra cada tic */
+                                if (passosAtivados.includes(Random)==false) {
+                                        /* ativa quando for um passo que ainda não foi ativado naquele tic em nenhum instrumento */
+                                        $('#passo_' + Passos[Random] + '.' + instrumentos[inst]).addClass('ativo');
+                                        /* quando ativa um passo novo, coloca ele no array pra continuar ativando passos diferentes */
+                                        passosAtivados.push(Random);
+                                }
+                        }
                 }
         }
         randomPassos();
