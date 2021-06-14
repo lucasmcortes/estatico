@@ -22,7 +22,7 @@
         p {min-width:100%;max-width:100%;margin:0 auto;font-size:12px;text-align:center;color:#f5ce1b;}
         img {width:100%;height:auto;}
         img.social {max-width:36px;height:36px;vertical-align:top;}
-        #container {text-align:center;}
+        #container {margin-top:8px;text-align:center;}
         #sequenciador {min-width:100%;max-width:100%;display:inline-block;}
         #passoscontainer {max-width:100%;display:inline-block;}
         .passowrapper {width:30px;display:inline-block;margin-right:5px;}
@@ -31,14 +31,21 @@
         .passo {display:inline-block;width:30px;height:30px;background-color:#f5ce1b;border:3px solid #eeefca;border-radius:9px;}
         #controles {min-width:100%;max-width:100%;display:inline-block;margin-top:3px;}
         .linha {min-width:100%;max-width:100%;display:inline-block;}
-        .controle {text-align:center;cursor:pointer;user-select:none;text-align:center;display:inline-block;width:34px;height:34px;margin:5px auto;padding:5px 34px;line-height:30px;vertical-align:middle;background-color:#f5ce1b;border:3px solid #eeefca;border-radius:9px;}
-        .menor {width:23px;}
+        .node {display:inline-block;}
+        .controle {text-align:center;cursor:pointer;user-select:none;display:inline-block;width:34px;height:34px;margin:5px auto;padding:5px 34px;line-height:30px;vertical-align:middle;background-color:#f5ce1b;border:3px solid #eeefca;border-radius:9px;}
+        .menor {width:5px;}
         .maior {width:90px;}
-        .imgcontrole {width:26px;vertical-align:middle;}
+        .imgcontrole {width:26px;max-width:26px;height:26px;vertical-align:middle;}
         .ativo, .tocando, .pausado, #controles .controle:active {background-color:#eeefca;}
         .passo.ativo {box-shadow: 0px -113px 25px -130px rgba(0,0,0,0.75) inset;}
         .tic.ativo {background-color:#f5ce1b;}
         #bottomcontainer {position:fixed;bottom:0;left:0;right:0;}
+        #pianinho {text-align:center;width:auto;margin:1.8% auto;}
+        .tecla {display:inline-block;height:90px;margin:0 auto;width:43px;background-color:#eeefca;vertical-align:top;border:1px solid #eeefca;}
+        .sustenido {background-color:#3b0055;position:relative;width:26px;height:72px;}
+        .tecla:hover, .tocada {background-color:#f5ce1b;}
+        .tecla:not(:first-child) {margin-left:-16.1px;}
+
         #sidecontainer {position:fixed;top:15vh;right:13px;}
         #sidecontainer div {margin:21px 13px;}
         @media screen and (max-width: 600px) {
@@ -277,8 +284,187 @@
                         </div>
                 </div> <!-- linha -->
                 <div class='linha'>
-                        <p>BPM</p>
-                        <input id='velocidade' type='number' value='180' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                        <div class='node'>
+                                <p>BPM</p>
+                                <input id='velocidade' type='number' value='120' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                        </div> <!-- node -->
+                        <div class='node'>
+                                <p>Osc. Dur.</p>
+                                <input id='osc_dur' type='number' value='1' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                        </div> <!-- node -->
+                </div> <!-- linha -->
+
+                <div class='linha'>
+                        <div id='pianinho'>
+                                <div id='C3' class='tecla'></div>
+                                <div id='C3S' class='tecla sustenido'></div>
+                                <div id='D3' class='tecla'></div>
+                                <div id='D3S' class='tecla sustenido'></div>
+                                <div id='E3' class='tecla'></div>
+                                <div id='F3' class='tecla' style='margin-left:0;'></div>
+                                <div id='F3S' class='tecla sustenido'></div>
+                                <div id='G3' class='tecla'></div>
+                                <div id='G3S' class='tecla sustenido'></div>
+                                <div id='A3' class='tecla'></div>
+                                <div id='A3S' class='tecla sustenido'></div>
+                                <div id='B3' class='tecla'></div>
+                        </div> <!-- pianinho -->
+                </div> <!-- linha -->
+
+                <div class='linha' style='display:none;'>
+                        <div class='node'>
+                                <p>Osc 01</p>
+                                <div id='oscilador_C3' data-teclado='65' class='controle osc' style='width:auto;'>
+                                        <img class='imgcontrole osc1' src='img/tocar.png'></img>
+                                </div>
+                        </div> <!-- node -->
+                        <div class='node'>
+                                <p id='C3'>C3 (130.810 Hz)</p>
+                                <input id='hertz_C3' type='number' value='130.810' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                        </div><!-- node -->
+                </div> <!-- linha -->
+
+                <div class='linha' style='display:none;'>
+                        <div class='node'>
+                                <p>Osc 02</p>
+                                <div id='oscilador_C3S' data-teclado='87' class='controle osc' style='width:auto;'>
+                                        <img class='imgcontrole osc1' src='img/tocar.png'></img>
+                                </div>
+                        </div> <!-- node -->
+                        <div class='node'>
+                                <p id='C3S'>C3S (138.590 Hz)</p>
+                                <input id='hertz_C3S' type='number' value='138.590' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                        </div><!-- node -->
+                </div> <!-- linha -->
+
+                <div class='linha' style='display:none;'>
+                        <div class='node'>
+                                <p>Osc 03</p>
+                                <div id='oscilador_D3' data-teclado='83' class='controle osc' style='width:auto;'>
+                                        <img class='imgcontrole osc1' src='img/tocar.png'></img>
+                                </div>
+                        </div> <!-- node -->
+                        <div class='node'>
+                                <p id='D3'>D3 (146.830 Hz)</p>
+                                <input id='hertz_D3' type='number' value='146.830' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                        </div><!-- node -->
+                </div> <!-- linha -->
+
+                <div class='linha' style='display:none;'>
+                        <div class='node'>
+                                <p>Osc 04</p>
+                                <div id='oscilador_D3S' data-teclado='69' class='controle osc' style='width:auto;'>
+                                        <img class='imgcontrole osc1' src='img/tocar.png'></img>
+                                </div>
+                        </div> <!-- node -->
+                        <div class='node'>
+                                <p id='D3S'>D3S (155.560 Hz)</p>
+                                <input id='hertz_D3S' type='number' value='155.560' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                        </div><!-- node -->
+                </div> <!-- linha -->
+
+                <div class='linha' style='display:none;'>
+                        <div class='node'>
+                                <p>Osc 05</p>
+                                <div id='oscilador_E3' data-teclado='68' class='controle osc' style='width:auto;'>
+                                        <img class='imgcontrole osc1' src='img/tocar.png'></img>
+                                </div>
+                        </div> <!-- node -->
+                        <div class='node'>
+                                <p id='E3'>E3 (164.810 Hz)</p>
+                                <input id='hertz_E3' type='number' value='164.810' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                        </div><!-- node -->
+                </div> <!-- linha -->
+
+                <div class='linha' style='display:none;'>
+                        <div class='node'>
+                                <p>Osc 06</p>
+                                <div id='oscilador_F3' data-teclado='70' class='controle osc' style='width:auto;'>
+                                        <img class='imgcontrole osc1' src='img/tocar.png'></img>
+                                </div>
+                        </div> <!-- node -->
+                        <div class='node'>
+                                <p id='F3'>F3 (174.610 Hz)</p>
+                                <input id='hertz_F3' type='number' value='174.610' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                        </div><!-- node -->
+                </div> <!-- linha -->
+
+                <div class='linha' style='display:none;'>
+                        <div class='node'>
+                                <p>Osc 07</p>
+                                <div id='oscilador_F3S' data-teclado='84' class='controle osc' style='width:auto;'>
+                                        <img class='imgcontrole osc1' src='img/tocar.png'></img>
+                                </div>
+                        </div> <!-- node -->
+                        <div class='node'>
+                                <p id='F3S'>F3S (185.000 Hz)</p>
+                                <input id='hertz_F3S' type='number' value='185.000' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                        </div><!-- node -->
+                </div> <!-- linha -->
+
+                <div class='linha' style='display:none;'>
+                        <div class='node'>
+                                <p>Osc 08</p>
+                                <div id='oscilador_G3' data-teclado='71' class='controle osc' style='width:auto;'>
+                                        <img class='imgcontrole osc1' src='img/tocar.png'></img>
+                                </div>
+                        </div> <!-- node -->
+                        <div class='node'>
+                                <p id='G3'>G3 (196.000 Hz)</p>
+                                <input id='hertz_G3' type='number' value='196.000' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                        </div><!-- node -->
+                </div> <!-- linha -->
+
+                <div class='linha' style='display:none;'>
+                        <div class='node'>
+                                <p>Osc 09</p>
+                                <div id='oscilador_G3S' data-teclado='89' class='controle osc' style='width:auto;'>
+                                        <img class='imgcontrole osc1' src='img/tocar.png'></img>
+                                </div>
+                        </div> <!-- node -->
+                        <div class='node'>
+                                <p id='G3S'>G3S (207.650 Hz)</p>
+                                <input id='hertz_G3S' type='number' value='207.650' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                        </div><!-- node -->
+                </div> <!-- linha -->
+
+                <div class='linha' style='display:none;'>
+                        <div class='node'>
+                                <p>Osc 10</p>
+                                <div id='oscilador_A3' data-teclado='72' class='controle osc' style='width:auto;'>
+                                        <img class='imgcontrole osc1' src='img/tocar.png'></img>
+                                </div>
+                        </div> <!-- node -->
+                        <div class='node'>
+                                <p id='A3'>A3 (220.000 Hz)</p>
+                                <input id='hertz_A3' type='number' value='220.000' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                        </div><!-- node -->
+                </div> <!-- linha -->
+
+                <div class='linha' style='display:none;'>
+                        <div class='node'>
+                                <p>Osc 11</p>
+                                <div id='oscilador_A3S' data-teclado='85' class='controle osc' style='width:auto;'>
+                                        <img class='imgcontrole osc1' src='img/tocar.png'></img>
+                                </div>
+                        </div> <!-- node -->
+                        <div class='node'>
+                                <p id='A3S'>A3S (233.080 Hz)</p>
+                                <input id='hertz_A3S' type='number' value='233.080' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                        </div><!-- node -->
+                </div> <!-- linha -->
+
+                <div class='linha' style='display:none;'>
+                        <div class='node'>
+                                <p>Osc 12</p>
+                                <div id='oscilador_B3' data-teclado='74' class='controle osc' style='width:auto;'>
+                                        <img class='imgcontrole osc1' src='img/tocar.png'></img>
+                                </div>
+                        </div> <!-- node -->
+                        <div class='node'>
+                                <p id='B3'>B3 (246.940 Hz)</p>
+                                <input id='hertz_B3' type='number' value='246.940' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                        </div><!-- node -->
                 </div> <!-- linha -->
         </div> <!-- controles -->
 </div> <!-- container -->
@@ -322,6 +508,158 @@
 </div>
 
 <script>
+        /* osc.js */
+        /* array das notas relativo ao teclado do computador*/
+        notasDasTeclas = {
+                65:'C3',
+                87:'C3S',
+                83:'D3',
+                69:'D3S',
+                68:'E3',
+                70:'F3',
+                84:'F3S',
+                71:'G3',
+                89:'G3S',
+                72:'A3',
+                85:'A3S',
+                74:'B3'
+        };
+        /* array das notas relativo ao teclado do computador */
+
+        /* release */
+        release = $('#osc_dur').val();
+        $('#osc_dur').on('change', function () {
+                release = $('#osc_dur').val();
+        });
+        /* release */
+
+        /* play */
+        ativacao = 0;
+        frequencias = [];
+        $('.osc').on('click', function() {
+                tocaSom(frequencias,release,$(this).attr('id').split('_')[1]);
+                ativacao++;
+        });
+        /* play */
+
+        /* trigger pelo teclado do computador */
+        window.onkeydown = tocaNota;
+        window.onkeyup = paraNota;
+
+        function paraNota(key) {
+                var keyCode = key.keyCode;
+                var novasFrequencias = [];
+
+                setTimeout(function () {
+                        for (freq=0;freq<frequencias.length;freq++) {
+                                frequencias[freq].stop();
+                                frequencias[freq].disconnect();
+                        }
+                        frequencias = novasFrequencias;
+                }, release+'1');
+
+                $('#oscilador_'+notasDasTeclas[keyCode]).removeClass('ativo');
+                $('#'+notasDasTeclas[keyCode]).removeClass('tocada');
+
+        }
+
+        function tocaNota(key) {
+
+                if (key.repeat) {
+                        // previne de retrigar direto quando holda a tecla
+                        return
+                }
+
+                var keyCode = key.keyCode;
+
+                $('#oscilador_'+notasDasTeclas[keyCode]).trigger('click');
+                $('#'+notasDasTeclas[keyCode]).addClass('tocada');
+
+                if (keyCode==38) {
+                        // Arrow up
+                        release = $('#osc_dur').val();
+                        if (release>=5) {
+                                $('#osc_dur').val(1);
+                        } else {
+                                $('#osc_dur').val( function(i, release) {
+                                        return ++release;
+                                });
+                        }
+                        release = $('#osc_dur').val();
+                }
+
+                if (keyCode==40) {
+                        // Arrow down
+                        release = $('#osc_dur').val();
+                        if (release<=1) {
+                                $('#osc_dur').val(1);
+                        } else {
+                                $('#osc_dur').val( function(i, release) {
+                                        return --release;
+                                });
+                        }
+                        release = $('#osc_dur').val();
+                }
+
+                if (keyCode==32) {
+                        //Spacebar
+                        if ($('#tocar').hasClass('tocando')==false) {
+                                $('#tocar').trigger('click');
+                        } else {
+                                $('#pausar').trigger('click');
+                        }
+                }
+        }
+        /* trigger pelo teclado do computador */
+
+        /* trigger pelo pianinho */
+        $('.tecla').on('click', function () {
+                nota = $(this).attr('id');
+                tecladoNota = $('#oscilador_'+nota).data('teclado');
+
+                $('#oscilador_'+nota).trigger('click');
+
+                setTimeout(function () {
+                        paraNota(tecladoNota);
+                        $('#oscilador_'+nota).removeClass('ativo');
+                        $('#'+tecladoNota).removeClass('tocada');
+                }, release+'00');
+        });
+        /* trigger pelo pianinho */
+
+        function tocaSom(frequencias,release,nota) {
+                if (ativacao == 0) {
+                        AudioContext = window.AudioContext || window.webkitAudioContext;
+                        contexto = new AudioContext({sampleRate: 48000});
+
+                        ganho = contexto.createGain();
+                        ganho.gain.value = 0.43;
+                        ganho.connect(contexto.destination);
+                }
+
+                hertz = $('#hertz_'+nota).val() * 2;
+                oscilador = contexto.createOscillator();
+                oscilador.frequency.setValueAtTime(hertz, contexto.currentTime);
+
+                // custom waves
+                // var real = new Float32Array([0,1,3,1,5,3,0]);
+                var real = new Float32Array([13,8,5,3,2,1,1]);
+                var imag = new Float32Array(real.length);
+                var ondaCustomizada = contexto.createPeriodicWave(real,imag);
+                oscilador.setPeriodicWave(ondaCustomizada);
+
+                //oscilador.type = 'triangle';
+
+                oscilador.connect(ganho);
+                oscilador.start(0);
+
+                //ganho.gain.exponentialRampToValueAtTime(0.000001, contexto.currentTime + release);
+
+                frequencias.push(oscilador);
+        } /* tocaSom */
+        /* osc.js */
+
+        /* seq.js */
         /* lista de instrumentos */
         instrumentos = [];
         $('audio').each(function() {
@@ -360,7 +698,7 @@
         /* adiciona todos os ids dos passos num array */
         Passos = [];
         $('.passo').each(function() {
-                Passos.push($(this).attr('id').split('_')[1]);
+                 Passos.push($(this).attr('id').split('_')[1]);
         });
 
         /* ativa passo */
@@ -392,7 +730,10 @@
                 for (inst=0;inst<banda;inst++) {
                         if ($('#passo_' + Passos[batuta] + '.' + instrumentos[inst]).hasClass('ativo')) {
                                 /* se o passo desse tic respectivo tá marcado */
+                                /* toca o arquivo de som */
                                 $('#audio_' + Passos[batuta] + '.' + instrumentos[inst])[0].play();
+                                /* toca o osc[inst] */
+                                //$('#oscplay_'+osc[inst]).trigger('click');
                         }
                 }
                 batuta++;
@@ -502,6 +843,7 @@
         /* bota o primeiro tic aceso */
         $('#tic_01').addClass('ativo');
         /* bota o primeiro tic aceso */
+        /* seq.js */
 </script>
 
 </body>
