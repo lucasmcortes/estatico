@@ -309,6 +309,7 @@
                                 <div id='A3S' class='tecla sustenido'></div>
                                 <div id='B3' class='tecla'></div>
                         </div> <!-- pianinho -->
+                        <canvas id='onda' style='height:180px;width:320px;padding:0;margin:0 auto;'></canvas>
                 </div> <!-- linha -->
 
                 <div class='linha' style='display:none;'>
@@ -552,6 +553,23 @@
         };
         /* array das notas relativo ao teclado do computador */
 
+        /* array com as frequencias das notas */
+        notasFreq = {
+                'C3':130.810,
+                'C3S':138.590,
+                'D3':146.830,
+                'D3S':155.560,
+                'E3':164.810,
+                'F3':174.610,
+                'F3S':185.000,
+                'G3':196.000,
+                'G3S':207.650,
+                'A3':220.000,
+                'A3S':233.080,
+                'B3':246.940
+        };
+        /* array com as frequencias das notas */
+
         /* release */
         release = $('#osc_dur').val();
         $('#osc_dur').on('change', function () {
@@ -580,13 +598,16 @@
                         for (freq=0;freq<frequencias.length;freq++) {
                                 frequencias[freq].stop();
                                 frequencias[freq].disconnect();
+
+                                // visualização da onda
+                                estaTocando = false;
+                                // visualização da onda
                         }
                         frequencias = novasFrequencias;
                 }, release+'1');
 
                 $('#oscilador_'+notasDasTeclas[keyCode]).removeClass('ativo');
                 $('#'+notasDasTeclas[keyCode]).removeClass('tocada');
-
         }
 
         function tocaNota(key) {
@@ -653,6 +674,33 @@
         });
         /* trigger pelo pianinho */
 
+        // visualização da onda
+        // https://stackoverflow.com/a/30632933
+        //draw function for canvas
+        function drawWave(analyser, ctx) {
+                var buffer = new Float32Array(1024),
+                w = ctx.canvas.width;
+
+                ctx.strokeStyle = "#fff";
+                ctx.setTransform(1,0,0,-1,0,100.5); // flip y-axis and translate to center
+                ctx.lineWidth = 3;
+
+          (function loop() {
+                  analyser.getFloatTimeDomainData(buffer);
+
+                  ctx.clearRect(0, -100, w, ctx.canvas.height+86);
+                  ctx.beginPath();
+
+                  ctx.moveTo(0, buffer[0] * 90);
+
+                  for (var x = 2; x < w; x += 2) ctx.lineTo(x, buffer[x] * 90);
+                  ctx.stroke();
+
+                  if (estaTocando) requestAnimationFrame(loop)
+          })();
+        }
+        // visualização da onda
+
         function tocaSom(frequencias,release,nota) {
                 if (ativacao == 0) {
                         AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -661,7 +709,27 @@
                         ganho = contexto.createGain();
                         ganho.gain.value = 0.43;
                         ganho.connect(contexto.destination);
+
+                        // visualização da onda
+                        analyser = contexto.createAnalyser();
+                        ganho.connect(analyser);
+                        analyser.connect(contexto.destination);
+                        estaTocando = false;
+                        // visualização da onda
+
                 }
+
+                // visualização da onda
+                var c = document.getElementById('onda'),
+                ctx = c.getContext('2d');
+                c.height = 180;
+                c.width = 320;
+                // make 0-line permanent as background
+                ctx.moveTo(0, 100.5);
+                ctx.lineTo(c.width, 100.5);
+                ctx.stroke();
+                //c.style.backgroundImage = "url(" + c.toDataURL() + ")"; // linha no meio da height
+                // visualização da onda
 
                 hertz = $('#hertz_'+nota).val() * 2;
                 oscilador = contexto.createOscillator();
@@ -675,10 +743,13 @@
                 var ondaCustomizada = contexto.createPeriodicWave(real,imag);
                 oscilador.setPeriodicWave(ondaCustomizada);
 
-                //oscilador.type = 'triangle';
-
                 oscilador.connect(ganho);
                 oscilador.start(0);
+
+                // visualização da onda
+                estaTocando = true;
+                drawWave(analyser, ctx);
+                // visualização da onda
 
                 //ganho.gain.exponentialRampToValueAtTime(0.000001, contexto.currentTime + release);
 
