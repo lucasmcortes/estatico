@@ -295,6 +295,7 @@
                 </div> <!-- linha -->
 
                 <div class='linha'>
+                        <canvas id='onda' style='height:55px;width:300px;padding:0;margin:0 auto;'></canvas>
                         <div id='pianinho'>
                                 <div id='C3' class='tecla'></div>
                                 <div id='C3S' class='tecla sustenido'></div>
@@ -309,7 +310,6 @@
                                 <div id='A3S' class='tecla sustenido'></div>
                                 <div id='B3' class='tecla'></div>
                         </div> <!-- pianinho -->
-                        <canvas id='onda' style='height:180px;width:300px;padding:0;margin:0 auto;'></canvas>
                 </div> <!-- linha -->
 
                 <div class='linha' style='display:none;'>
@@ -682,8 +682,8 @@
                 w = ctx.canvas.width;
 
                 ctx.strokeStyle = "#fff";
-                ctx.setTransform(1,0,0,-1,0,100.5); // flip y-axis and translate to center
-                ctx.lineWidth = 3;
+                ctx.setTransform(1,0,0,-1,0,111); // flip y-axis and translate to center
+                ctx.lineWidth = 1.8;
 
           (function loop() {
                   analyser.getFloatTimeDomainData(buffer);
