@@ -756,7 +756,7 @@
                 //c.style.backgroundImage = "url(" + c.toDataURL() + ")"; // linha no meio da height
                 // visualização da onda
 
-                hertz = $('#hertz_'+nota).val() * 2;
+                hertz = $('#hertz_'+nota).val()*1.618;
                 oscilador = contexto.createOscillator();
                 oscilador.frequency.setValueAtTime(hertz, contexto.currentTime);
 
