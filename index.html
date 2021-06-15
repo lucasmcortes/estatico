@@ -46,12 +46,15 @@
         #teclas {background-color:#27e5fc;margin-top:1.8%;}
         .notasDisplay {width:auto;max-width:260px;line-height:23px;height:23px;color:#3b0055;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
         .notasDisplay::first-letter {font-size:18px}
-        #onda {height:86px;width:260px;padding:0;margin:-21px auto;display:inline-block;}
-        #pianinho {text-align:center;width:auto;padding:0;margin:1.8% auto;user-select:none;display:inline-block;border:3px solid #eeefca;}
+        #onda {height:90px;width:260px;padding:0;margin:-21px auto;display:inline-block;}
+        #pianinho {text-align:center;width:auto;padding:0;margin:8px auto;user-select:none;display:inline-block;border:3px solid #eeefca;}
         .tecla {display:inline-block;height:116px;margin:0 auto;width:36px;background-color:#eeefca;vertical-align:top;}
         .sustenido {background-color:#3b0055;position:relative;width:26px;height:72px;}
         .tecla:hover, .tocada {background-color:#f5ce1b;}
         .tecla:not(:first-child) {margin-left:-15.3px;}
+        .oitava {user-select:none;cursor:pointer;padding:5px;border-radius:34px;color:#3b0055;margin:0 auto;background-color:#eeefca;display:inline-block;border:1px solid #eeefca;}
+        .oitava:hover {border:1px solid #3b0055;}
+        .oitava.ativa {background-color:#3b0055;color:#eeefca;border:1px solid #3b0055;}
 
         #sidecontainer {position:fixed;top:15vh;right:13px;}
         #sidecontainer div {margin:21px 13px;}
@@ -326,6 +329,14 @@
                                         <div id='B3' class='tecla'></div>
                                 </div> <!-- pianinho -->
                         </div> <!-- linha -->
+                        <div id='oitava' class='linha' style='margin:8px auto;'>
+                                <p id='25' class='oitava'>C1</p>
+                                <p id='05' class='oitava'>C2</p>
+                                <p id='1' class='oitava'>C3</p>
+                                <p id='1618' class='oitava ativa'>C3 x 1.618</p>
+                                <p id='1963' class='oitava'>432Hz</p>
+                                <p id='2' class='oitava'>C4</p>
+                        </div> <!-- linha -->
                         <div class='linha'>
                                 <p id='notasTocadas' class='notasDisplay'></p>
                         </div> <!-- linha -->
@@ -555,6 +566,10 @@
 
 <script>
         /* osc.js */
+
+        ativacao = 0;
+        frequencias = [];
+
         /* array das notas relativo ao teclado do computador*/
         notasDasTeclas = {
                 65:'C3',
@@ -596,14 +611,42 @@
         });
         /* release */
 
-        /* play */
-        ativacao = 0;
-        frequencias = []
+        /* oitava */
+        // começa assim
+        oitava = setOitava($('.oitava.ativa').attr('id'));
+        function setOitava(oitava) {
+                paraTudo();
+                if (oitava == 25) {
+                        oitava = 0.25;
+                } else if (oitava == 05) {
+                        oitava = 0.50;
+                } else if (oitava == 1618) {
+                        oitava = 1.618;
+                } else if (oitava == 1963) {
+                        oitava = 1.963;
+                }
+                return oitava;
+        }
+        $('.oitava').on("click", function() {
+                oitava = setOitava($(this).attr('id'));
+                $('.oitava').removeClass('ativa');
+                $(this).addClass('ativa');
+        });
+        // para tudo quando muda de oitava com o teclado
+        function paraTudo() {
+                for (freq=0;freq<frequencias.length;freq++) {
+                        frequencias[freq].stop();
+                        frequencias[freq].disconnect();
+                }
+        }
+        /* oitava */
+
+        /* toca oscilador */
         $('.osc').on('click', function() {
                 nota = $(this).attr('id').split('_')[1];
-                tocaSom(frequencias,release,nota);
+                tocaSom(frequencias,release,nota,oitava);
         });
-        /* play */
+        /* toca oscilador */
 
         /* trigger pelo pianinho */
         $('.tecla').on('touchstart mousedown', function () {
@@ -635,18 +678,23 @@
                 var keyCode = key.keyCode;
                 var novasFrequencias = [];
 
-                setTimeout(function () {
-                        for (freq=0;freq<frequencias.length;freq++) {
+                // para de tocar só a que parou de apertar
+                for (freq=0;freq<frequencias.length;freq++) {
+                        if (Math.round(frequencias[freq].frequency.value) === (Math.round(notasFreq[notasDasTeclas[keyCode]]*oitava))) {
+                                // se a que desapertou é igual a que chegou a vez no for, para de tocar
                                 frequencias[freq].stop();
                                 frequencias[freq].disconnect();
-                                notasAtivas = [];
-
-                                // visualização da onda
-                                estaTocando = false;
-                                // visualização da onda
+                        } else {
+                                // as outras do for continua tocando
+                                novasFrequencias.push(frequencias[freq]);
                         }
-                        frequencias = novasFrequencias;
-                }, release+'1');
+                        notasAtivas = [];
+
+                        // visualização da onda
+                        estaTocando = false;
+                        // visualização da onda
+                }
+                frequencias = novasFrequencias;
 
                 $('#oscilador_'+notasDasTeclas[keyCode]).removeClass('ativo');
                 $('#'+notasDasTeclas[keyCode]).removeClass('tocada');
@@ -664,6 +712,22 @@
                 $('#oscilador_'+notasDasTeclas[keyCode]).trigger('click');
                 $('#'+notasDasTeclas[keyCode]).addClass('tocada');
 
+                // muda a oitava
+                if (keyCode==37) {
+                        // Arrow left
+                        if ($('.oitava.ativa').not(':first-child')) {
+                                setOitava($('.oitava.ativa').prev().trigger('click'));
+                        }
+                }
+                if (keyCode==39) {
+                        // Arrow right
+                        if ($('.oitava.ativa').not(':last-child')) {
+                                setOitava($('.oitava.ativa').next().trigger('click'));
+                        }
+                }
+                // muda a oitava
+
+                // release/osc_dur
                 if (keyCode==38) {
                         // Arrow up
                         release = $('#osc_dur').val();
@@ -689,7 +753,9 @@
                         }
                         release = $('#osc_dur').val();
                 }
+                // release/osc_dur
 
+                // toca o sequenciador
                 if (keyCode==32) {
                         //Spacebar
                         if ($('#tocar').hasClass('tocando')==false) {
@@ -698,6 +764,7 @@
                                 $('#pausar').trigger('click');
                         }
                 }
+                // toca o sequenciador
         }
         /* trigger pelo teclado do computador */
 
@@ -728,7 +795,7 @@
         }
         // visualização da onda
 
-        function tocaSom(frequencias,release,nota) {
+        function tocaSom(frequencias,release,nota,oitava) {
                 if (ativacao == 0) {
                         AudioContext = window.AudioContext || window.webkitAudioContext;
                         contexto = new AudioContext({sampleRate: 48000});
@@ -746,17 +813,7 @@
 
                 }
 
-                // visualização da onda
-                var c = document.getElementById('onda'),
-                ctx = c.getContext('2d');
-                // make 0-line permanent as background
-                ctx.moveTo(0, 100.5);
-                ctx.lineTo(c.width, 100.5);
-                ctx.stroke();
-                //c.style.backgroundImage = "url(" + c.toDataURL() + ")"; // linha no meio da height
-                // visualização da onda
-
-                hertz = $('#hertz_'+nota).val()*1.618;
+                hertz = $('#hertz_'+nota).val()*oitava;
                 oscilador = contexto.createOscillator();
                 oscilador.frequency.setValueAtTime(hertz, contexto.currentTime);
 
@@ -772,6 +829,8 @@
                 oscilador.start(0);
 
                 // visualização da onda
+                var c = document.getElementById('onda');
+                ctx = c.getContext('2d');
                 estaTocando = true;
                 drawWave(analyser, ctx);
                 // visualização da onda
@@ -785,16 +844,6 @@
                 frequencias.push(oscilador);
                 ativacao++;
         } /* tocaSom */
-
-        /* pra já começar com a linha aparecendo em cima do teclado */
-        function Inicio() {
-                $('#C3').trigger('mousedown');
-                $('#C3').trigger('mouseup');
-                $('#notasAtivas').html('&nbsp;');
-                $('#notasTocadas').html('&nbsp;');
-        }
-        Inicio();
-        /* pra já começar com a linha aparecendo em cima do teclado */
         /* osc.js */
 
         /* seq.js */
