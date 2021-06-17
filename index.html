@@ -17,6 +17,9 @@
 </head>
 
 <style>
+        @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+        @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+        @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
         * {transition: 0.1s;}
         body {background-color:#27e5fc;margin:0;font-family: "Mulish", sans-serif;}
         audio {display:none;}
@@ -571,6 +574,47 @@
 
         ativacao = 0;
         frequencias = [];
+
+        function Rndm(min, max) {
+                return Math.random() * (max - min + 1) + min
+        }
+
+        /* estrelinha */
+        estrelas = 0;
+        function Pisca() {
+                estrelas++;
+                novaEstrelinha = document.createElement("div");
+                novaEstrelinha.classList.add('estrela');
+                novaEstrelinha.setAttribute('id', 's_'+estrelas);
+                document.body.appendChild(novaEstrelinha);
+
+                estrelinha = Rndm(1.8,5);
+                estrelinhaY = Rndm(67,($(document).height()-67));
+                estrelinhaX = Rndm(67,($(document).width()-67));
+
+                $(novaEstrelinha).css({
+                        'position':'absolute',
+                        'border-radius':'34px',
+                        'background-color':'#3b0055',
+                        'animation':'spin 12s linear infinite',
+                        'top':estrelinhaY,
+                        'left':estrelinhaX,
+                        'width':estrelinha,
+                        'height':estrelinha
+                });
+
+                $(novaEstrelinha).fadeIn(1200, function() {
+                        $(this).fadeOut(12000);
+                        setTimeout(function() {
+                                $(this).remove();
+                        },1200);
+                });
+        }
+
+        setInterval(function() {
+                Pisca();
+        },120);
+        /* estrelinha */
 
         /* array das notas relativo ao teclado do computador*/
         notasDasTeclas = {
