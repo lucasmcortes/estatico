@@ -583,7 +583,7 @@
         estrelas = 0;
         function Pisca() {
                 estrelas++;
-                novaEstrelinha = document.createElement("div");
+                const novaEstrelinha = document.createElement('div');
                 novaEstrelinha.classList.add('estrela');
                 novaEstrelinha.setAttribute('id', 's_'+estrelas);
                 document.body.appendChild(novaEstrelinha);
@@ -604,16 +604,17 @@
                 });
 
                 $(novaEstrelinha).fadeIn(1200, function() {
-                        $(this).fadeOut(12000);
-                        setTimeout(function() {
-                                $(this).remove();
-                        },1200);
-                });
+                        $(this).fadeOut(12000, function() {
+                                setTimeout(function() {
+                                        novaEstrelinha.remove();
+                                },1200);
+                        }); // fadeOut
+                }); // fadeIn
         }
 
         setInterval(function() {
                 Pisca();
-        },120);
+        }, 180);
         /* estrelinha */
 
         /* array das notas relativo ao teclado do computador*/
