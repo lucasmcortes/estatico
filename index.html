@@ -17,14 +17,20 @@
 </head>
 
 <style>
+        :root {
+                --amarelo:#f5ce1b;
+                --roxo:#3b0055;
+                --bege:#eeefca;
+                --azul:#27e5fc;
+        }
         @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
         @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
         @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
         * {transition: 0.1s;}
-        body {background-color:#27e5fc;margin:0;font-family: "Mulish", sans-serif;}
+        body {background-color:var(--azul);margin:0;font-family: "Mulish", sans-serif;}
         audio {display:none;}
-        a {color:#3b0055;}
-        p {margin:0 auto;font-size:12px;text-align:center;color:#3b0055;}
+        a {color:var(--roxo);}
+        p {margin:0 auto;font-size:12px;text-align:center;color:var(--roxo);}
         img {width:100%;height:auto;}
         img.social {max-width:26px;height:26px;vertical-align:top;}
         #container {text-align:center;}
@@ -32,32 +38,32 @@
         #passoscontainer {max-width:100%;display:inline-block;}
         .passowrapper {width:30px;display:inline-block;margin-right:5px;}
         .ticwrapper {display:inline-block;margin:0px 5px;margin-left:11.23px;}
-        .tic {width:4.5px;height:4.5px;border-radius:34px;margin:0 auto;background-color:#3b0055;}
-        .passo {display:inline-block;width:30px;height:30px;background-color:#f5ce1b;border:3px solid #eeefca;border-radius:9px;}
+        .tic {width:4.5px;height:4.5px;border-radius:34px;margin:0 auto;background-color:var(--roxo);}
+        .passo {display:inline-block;width:30px;height:30px;background-color:var(--amarelo);border:3px solid var(--bege);border-radius:9px;}
         #controles {min-width:100%;max-width:100%;display:inline-block;margin-top:3px;}
         .linha {min-width:100%;max-width:100%;display:inline-block;}
         .node {display:inline-block;}
-        .controle {text-align:center;cursor:pointer;user-select:none;display:inline-block;width:34px;height:34px;margin:5px auto;padding:5px 34px;line-height:30px;vertical-align:middle;background-color:#f5ce1b;border:3px solid #eeefca;border-radius:9px;}
+        .controle {text-align:center;cursor:pointer;user-select:none;display:inline-block;width:34px;height:34px;margin:5px auto;padding:5px 34px;line-height:30px;vertical-align:middle;background-color:var(--amarelo);border:3px solid var(--bege);border-radius:9px;}
         .menor {width:23px;}
         .maior {width:90px;}
         .imgcontrole {width:26px;max-width:26px;height:26px;vertical-align:middle;}
-        .ativo, .tocando, .pausado, #controles .controle:active {background-color:#eeefca;}
+        .ativo, .tocando, .pausado, #controles .controle:active {background-color:var(--bege);}
         .passo.ativo {box-shadow: 0px -113px 25px -130px rgba(0,0,0,0.75) inset;}
-        .tic.ativo {background-color:#f5ce1b;}
-        #bottomcontainer {position:fixed;bottom:0;left:0;right:0;background-color:#eeefca;}
-        #bottomcontainer p {color:#3b0055;}
-        #teclas {background-color:#27e5fc;margin-top:1.8%;}
-        .notasDisplay {width:auto;max-width:260px;line-height:23px;height:23px;color:#3b0055;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+        .tic.ativo {background-color:var(--amarelo);}
+        #bottomcontainer {position:fixed;bottom:0;left:0;right:0;background-color:var(--bege);}
+        #bottomcontainer p {color:var(--roxo);}
+        #teclas {margin-top:1.8%;}
+        .notasDisplay {width:auto;max-width:260px;line-height:23px;height:23px;color:var(--roxo);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
         .notasDisplay::first-letter {font-size:18px}
         #onda {height:90px;width:260px;padding:0;margin:-21px auto;display:inline-block;}
-        #pianinho {text-align:center;width:auto;padding:0;margin:8px auto;user-select:none;display:inline-block;border:3px solid #eeefca;}
-        .tecla {display:inline-block;height:116px;margin:0 auto;width:36px;background-color:#eeefca;vertical-align:top;}
-        .sustenido {background-color:#3b0055;position:relative;width:26px;height:72px;}
-        .tecla:hover, .tocada {background-color:#f5ce1b;}
+        #pianinho {text-align:center;width:auto;padding:0;margin:8px auto;user-select:none;display:inline-block;border:3px solid var(--bege);}
+        .tecla {display:inline-block;height:116px;margin:0 auto;width:36px;background-color:var(--bege);vertical-align:top;}
+        .sustenido {background-color:var(--roxo);position:relative;width:26px;height:72px;}
+        .tecla:hover, .tocada {background-color:var(--amarelo);}
         .tecla:not(:first-child) {margin-left:-15.3px;}
-        .oitava {user-select:none;cursor:pointer;padding:5px;border-radius:34px;color:#3b0055;margin:0 auto;background-color:#eeefca;display:inline-block;border:1px solid #eeefca;}
-        .oitava:hover {border:1px solid #3b0055;}
-        .oitava.ativa {background-color:#3b0055;color:#eeefca;border:1px solid #3b0055;}
+        .oitava {user-select:none;cursor:pointer;padding:5px;border-radius:34px;color:var(--roxo);margin:0 auto;background-color:var(--bege);display:inline-block;border:1px solid var(--bege);}
+        .oitava:hover {border:1px solid var(--roxo);}
+        .oitava.ativa {background-color:var(--roxo);color:var(--bege);border:1px solid var(--roxo);}
 
         #sidecontainer {position:fixed;top:15vh;right:13px;}
         #sidecontainer div {margin:21px 13px;}
@@ -72,7 +78,7 @@
 
 <div class='linha'>
         <div style='margin:8px;text-align:center;'>
-                <img style='background-color:#eeefca;border-radius:34px;padding:8px;max-width:34px;' src='img/logo.png'></img>
+                <img style='background-color:var(--bege);border-radius:34px;padding:8px;max-width:34px;' src='img/logo.png'></img>
         </div>
 </div>
 
@@ -290,20 +296,20 @@
                 <div class='linha'>
                         <div id='limpar' class='controle' style='width:auto;'>
                                 <!-- <img class='imgcontrole' src='img/limpar.png'></img> -->
-                                <p style='color:#3b0055;font-size:15px;'>limpar</p>
+                                <p style='color:var(--roxo);font-size:15px;'>limpar</p>
                         </div>
                         <div id='aleatorio' class='controle' style='width:auto;'>
-                                <p style='color:#3b0055;font-size:15px;'>aleatório</p>
+                                <p style='color:var(--roxo);font-size:15px;'>aleatório</p>
                         </div>
                 </div> <!-- linha -->
                 <div class='linha'>
                         <!-- <div class='node'> -->
                                 <p>BPM</p>
-                                <input id='velocidade' type='number' value='120' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                                <input id='velocidade' type='number' value='120' class='controle maior' style='font-size:18px;color:var(--roxo);'></input>
                         <!-- </div>  node -->
                         <!-- <div class='node'> -->
                                 <p style='display:none;'>Osc. Dur.</p>
-                                <input id='osc_dur' type='number' value='1' class='controle maior' style='font-size:18px;color:#3b0055;display:none;'></input>
+                                <input id='osc_dur' type='number' value='1' class='controle maior' style='font-size:18px;color:var(--roxo);display:none;'></input>
                         <!-- </div> node -->
                 </div> <!-- linha -->
 
@@ -352,7 +358,7 @@
                         </div> <!-- node -->
                         <div class='node'>
                                 <p id='C3'>C3 (130.810 Hz)</p>
-                                <input id='hertz_C3' type='number' value='130.810' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                                <input id='hertz_C3' type='number' value='130.810' class='controle maior' style='font-size:18px;color:var(--roxo);'></input>
                         </div><!-- node -->
                 </div> <!-- linha -->
 
@@ -365,7 +371,7 @@
                         </div> <!-- node -->
                         <div class='node'>
                                 <p id='C3S'>C3S (138.590 Hz)</p>
-                                <input id='hertz_C3S' type='number' value='138.590' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                                <input id='hertz_C3S' type='number' value='138.590' class='controle maior' style='font-size:18px;color:var(--roxo);'></input>
                         </div><!-- node -->
                 </div> <!-- linha -->
 
@@ -378,7 +384,7 @@
                         </div> <!-- node -->
                         <div class='node'>
                                 <p id='D3'>D3 (146.830 Hz)</p>
-                                <input id='hertz_D3' type='number' value='146.830' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                                <input id='hertz_D3' type='number' value='146.830' class='controle maior' style='font-size:18px;color:var(--roxo);'></input>
                         </div><!-- node -->
                 </div> <!-- linha -->
 
@@ -391,7 +397,7 @@
                         </div> <!-- node -->
                         <div class='node'>
                                 <p id='D3S'>D3S (155.560 Hz)</p>
-                                <input id='hertz_D3S' type='number' value='155.560' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                                <input id='hertz_D3S' type='number' value='155.560' class='controle maior' style='font-size:18px;color:var(--roxo);'></input>
                         </div><!-- node -->
                 </div> <!-- linha -->
 
@@ -404,7 +410,7 @@
                         </div> <!-- node -->
                         <div class='node'>
                                 <p id='E3'>E3 (164.810 Hz)</p>
-                                <input id='hertz_E3' type='number' value='164.810' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                                <input id='hertz_E3' type='number' value='164.810' class='controle maior' style='font-size:18px;color:var(--roxo);'></input>
                         </div><!-- node -->
                 </div> <!-- linha -->
 
@@ -417,7 +423,7 @@
                         </div> <!-- node -->
                         <div class='node'>
                                 <p id='F3'>F3 (174.610 Hz)</p>
-                                <input id='hertz_F3' type='number' value='174.610' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                                <input id='hertz_F3' type='number' value='174.610' class='controle maior' style='font-size:18px;color:var(--roxo);'></input>
                         </div><!-- node -->
                 </div> <!-- linha -->
 
@@ -430,7 +436,7 @@
                         </div> <!-- node -->
                         <div class='node'>
                                 <p id='F3S'>F3S (185.000 Hz)</p>
-                                <input id='hertz_F3S' type='number' value='185.000' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                                <input id='hertz_F3S' type='number' value='185.000' class='controle maior' style='font-size:18px;color:var(--roxo);'></input>
                         </div><!-- node -->
                 </div> <!-- linha -->
 
@@ -443,7 +449,7 @@
                         </div> <!-- node -->
                         <div class='node'>
                                 <p id='G3'>G3 (196.000 Hz)</p>
-                                <input id='hertz_G3' type='number' value='196.000' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                                <input id='hertz_G3' type='number' value='196.000' class='controle maior' style='font-size:18px;color:var(--roxo);'></input>
                         </div><!-- node -->
                 </div> <!-- linha -->
 
@@ -456,7 +462,7 @@
                         </div> <!-- node -->
                         <div class='node'>
                                 <p id='G3S'>G3S (207.650 Hz)</p>
-                                <input id='hertz_G3S' type='number' value='207.650' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                                <input id='hertz_G3S' type='number' value='207.650' class='controle maior' style='font-size:18px;color:var(--roxo);'></input>
                         </div><!-- node -->
                 </div> <!-- linha -->
 
@@ -469,7 +475,7 @@
                         </div> <!-- node -->
                         <div class='node'>
                                 <p id='A3'>A3 (220.000 Hz)</p>
-                                <input id='hertz_A3' type='number' value='220.000' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                                <input id='hertz_A3' type='number' value='220.000' class='controle maior' style='font-size:18px;color:var(--roxo);'></input>
                         </div><!-- node -->
                 </div> <!-- linha -->
 
@@ -482,7 +488,7 @@
                         </div> <!-- node -->
                         <div class='node'>
                                 <p id='A3S'>A3S (233.080 Hz)</p>
-                                <input id='hertz_A3S' type='number' value='233.080' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                                <input id='hertz_A3S' type='number' value='233.080' class='controle maior' style='font-size:18px;color:var(--roxo);'></input>
                         </div><!-- node -->
                 </div> <!-- linha -->
 
@@ -495,7 +501,7 @@
                         </div> <!-- node -->
                         <div class='node'>
                                 <p id='B3'>B3 (246.940 Hz)</p>
-                                <input id='hertz_B3' type='number' value='246.940' class='controle maior' style='font-size:18px;color:#3b0055;'></input>
+                                <input id='hertz_B3' type='number' value='246.940' class='controle maior' style='font-size:18px;color:var(--roxo);'></input>
                         </div><!-- node -->
                 </div> <!-- linha -->
         </div> <!-- controles -->
@@ -601,7 +607,7 @@
                 $(novaEstrelinha).css({
                         'position':'absolute',
                         'border-radius':'34px',
-                        'background-color':'#3b0055',
+                        'background-color':'var(--roxo)',
                         'animation':'spin 12s linear infinite',
                         'top':estrelinhaY,
                         'left':estrelinhaX,
@@ -729,6 +735,12 @@
                 var keyCode = key.keyCode;
                 var novasFrequencias = [];
 
+                if (frequencias.length===0) {
+                        // visualização da onda
+                        estaTocando = false;
+                        // visualização da onda
+                }
+
                 // para de tocar só a que parou de apertar
                 for (freq=0;freq<frequencias.length;freq++) {
                         if (Math.round(frequencias[freq].frequency.value) === (Math.round(notasFreq[notasDasTeclas[keyCode]]*oitava))) {
@@ -740,12 +752,12 @@
                                 novasFrequencias.push(frequencias[freq]);
                         }
                         notasAtivas = [];
-
-                        // visualização da onda
-                        estaTocando = false;
-                        // visualização da onda
                 }
                 frequencias = novasFrequencias;
+
+                if (frequencias.length===0) {
+                        paraTudo();
+                }
 
                 $('#oscilador_'+notasDasTeclas[keyCode]).removeClass('ativo');
                 $('#'+notasDasTeclas[keyCode]).removeClass('tocada');
@@ -826,7 +838,7 @@
                 var buffer = new Float32Array(1024),
                 w = ctx.canvas.width;
 
-                ctx.strokeStyle = "#3b0055";
+                ctx.strokeStyle = "var(--roxo)";
                 ctx.setTransform(1,0,0,-1,0,111); // flip y-axis and translate to center
                 ctx.lineWidth = 1.8;
 
@@ -857,6 +869,7 @@
 
                         // visualização da onda
                         analyser = contexto.createAnalyser();
+                        analyser.fftSize = 1024;
                         ganho.connect(analyser);
                         analyser.connect(contexto.destination);
                         estaTocando = false;
@@ -890,14 +903,16 @@
                 mostraNotas(nota);
                 // visualização das notas ativas
 
-                //ganho.gain.exponentialRampToValueAtTime(0.000001, contexto.currentTime + release);
-
-                // aparece uma estrelinha
+                // estrelinha
                 Pisca();
+                // estrelinha
+
+                //ganho.gain.exponentialRampToValueAtTime(0.000001, contexto.currentTime + release);
 
                 frequencias.push(oscilador);
                 ativacao++;
         } /* tocaSom */
+
         /* osc.js */
 
         /* seq.js */
