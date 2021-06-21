@@ -27,7 +27,7 @@
         @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
         @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
         * {transition: 0.1s;}
-        body {background-color:var(--azul);margin:0;font-family: "Mulish", sans-serif;}
+        body {background-color:var(--azul);margin:0;font-family: "Mulish", sans-serif;overflow-x:hidden;}
         audio {display:none;}
         a {color:var(--roxo);}
         p {margin:0 auto;font-size:12px;text-align:center;color:var(--roxo);}
@@ -624,6 +624,45 @@
                 }); // fadeIn
         }
         /* estrelinha */
+
+        /* nuvem */
+        nuvens = 0;
+        function Ceu() {
+                nuvens++;
+                const novaNuvem = document.createElement('div');
+                novaNuvem.setAttribute('id', 'n_'+nuvens);
+                document.body.appendChild(novaNuvem);
+
+                vento = Rndm(13,55);
+                nuvem = Rndm(180,360);
+                nuvemY = Rndm(-90,($(document).height()-nuvem));
+
+                $(novaNuvem).css({
+                        'position':'fixed',
+                        'margin-left':'-720px',
+                        'background-color':'var(--bege)',
+                        'border-radius':'900px',
+                        'z-index':'-1',
+                        'top':nuvemY,
+                        'height':nuvem,
+                        'width':nuvem,
+                        'opacity':'0.26'
+                });
+
+                var s = 5;
+                setInterval(function() {
+                        var eLeftPos = novaNuvem.offsetLeft;
+                        novaNuvem.style.marginLeft = (eLeftPos + s) + 'px';
+                        if (eLeftPos > ($(document).width()) + (nuvem + 180)) {
+                                novaNuvem.remove();
+                        }
+                }, vento);
+        }
+        /* nuvem */
+
+        setInterval(function() {
+                Ceu();
+        }, 360);
 
         /* array das notas relativo ao teclado do computador*/
         notasDasTeclas = {
